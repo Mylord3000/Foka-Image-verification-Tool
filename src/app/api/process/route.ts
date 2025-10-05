@@ -368,7 +368,7 @@ export async function POST(request: Request) {
       if (includePicarta) {
         try {
           const picarta = await runPythonScript(
-            "Picarta API call.py",
+            "python/picarta_call.py",
             filePath,
           );
           geolocations = extractPicartaLocations(picarta.raw);
@@ -425,7 +425,7 @@ export async function POST(request: Request) {
 
       try {
         const reality = await runPythonScript(
-          "Reality defender API call.py",
+          "python/reality_defender_call.py",
           filePath,
         );
         const realityDetails = isRecord(reality.raw) ? reality.raw : null;

@@ -1,0 +1,4 @@
+picarta
+realitydefender
+simplekml
+pillow
