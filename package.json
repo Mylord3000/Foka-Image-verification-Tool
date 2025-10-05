@@ -24,5 +24,10 @@
     "tailwindcss": "^4",
     "@biomejs/biome": "2.2.0",
     "@types/leaflet": "^1.9.8"
+  },
+  "optionalDependencies": {
+    "@next/swc-linux-x64-gnu": "15.5.4",
+    "@next/swc-linux-x64-musl": "15.5.4",
+    "lightningcss": "^1.27.0"
   }
 }
