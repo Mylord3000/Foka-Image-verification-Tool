@@ -328,7 +328,17 @@ const buildSummary = (
 ): string =>
   entries.map(({ label, text }) => `${label}:\n${text}`).join("\n\n");
 
-const saveUploadedFile = async (file: File) => {
+type UploadFile = Blob & { name: string };
+
+const isUploadFile = (value: FormDataEntryValue | null): value is UploadFile =>
+  typeof value === "object" &&
+  value !== null &&
+  "arrayBuffer" in value &&
+  typeof (value as Blob).arrayBuffer === "function" &&
+  "name" in value &&
+  typeof (value as { name?: unknown }).name === "string";
+
+const saveUploadedFile = async (file: UploadFile) => {
   const buffer = Buffer.from(await file.arrayBuffer());
   const baseDir = await mkdtemp(join(tmpdir(), "foka-"));
   const sanitizedName =
@@ -345,7 +355,7 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get("file");
 
-    if (!file || !(file instanceof File)) {
+    if (!isUploadFile(file)) {
       return NextResponse.json(
         { error: "Photo is missing from the request." },
         { status: 400 },
