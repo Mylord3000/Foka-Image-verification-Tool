@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start -H 0.0.0.0 -p ${PORT:-3000}",
+    "build": "NEXT_DISABLE_LIGHTNINGCSS=1 LIGHTNINGCSS_DISABLE=1 next build",
+    "start": "NEXT_DISABLE_LIGHTNINGCSS=1 LIGHTNINGCSS_DISABLE=1 next start -H 0.0.0.0 -p ${PORT:-3000}",
     "lint": "biome check",
     "format": "biome format --write"
   },
